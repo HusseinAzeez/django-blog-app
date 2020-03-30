@@ -12,7 +12,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Account created! You are now able to log in')
-            return redirect('user-login')
+            return redirect('login')
     else:
         form = UserRegisterForm()
 
@@ -35,7 +35,7 @@ def profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, f'Your account has been updated')
-            return redirect('user-profile')
+            return redirect('profile')
     else:
         # Instance: is the instance of the expected object
         # request contains the current user object
@@ -45,4 +45,4 @@ def profile(request):
         "user_form": user_form,
         "profile_form": profile_form
     }
-    return render(request, 'profile.html', context)
+    return render(request, 'user/profile.html', context)
