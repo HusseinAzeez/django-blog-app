@@ -4,7 +4,8 @@ from django.views.generic import (
     ListView, 
     DetailView, 
     CreateView,
-    UpdateView
+    UpdateView,
+    DeleteView
 )
 # Local imports
 from blog.models import Post
@@ -36,6 +37,18 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    # UserPassesTestMixin will run this when a user try to update a post.
+    # It pass if the user is the post's author.
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin,  DeleteView):
+    model = Post
+    success_url = '/'
 
     # UserPassesTestMixin will run this when a user try to update a post.
     # It pass if the user is the post's author.
