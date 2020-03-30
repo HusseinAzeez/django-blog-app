@@ -20,7 +20,7 @@ from user import views as user_views
 
 urlpatterns = [
     path('profile/', user_views.profile, name='user-profile'),
-    path('login/', views.LoginView.as_view(template_name='login.html'), name='user-login'),
-    path('logout/', views.LogoutView.as_view(template_name='logout.html'), name='user-logout'),
+    path('login/', views.LoginView.as_view(template_name='user/login.html'), name='user-login'),
+    path('logout/', views.LogoutView.as_view(template_name='user/logout.html'), name='user-logout'),
     path('register/', user_views.register, name='user-register')
 ]

@@ -11,7 +11,6 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
             messages.success(request, f'Account created! You are now able to log in')
             return redirect('user-login')
     else:
@@ -20,7 +19,7 @@ def register(request):
     context = {
         'form': form
     }
-    return render(request, 'register.html', context)
+    return render(request, 'user/register.html', context)
     
 
 @login_required
